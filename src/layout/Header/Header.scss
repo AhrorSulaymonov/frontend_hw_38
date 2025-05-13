@@ -1,0 +1,411 @@
+// src/layout/Header/Header.scss
+
+@use "sass:color"; // Sass color modulini import qilish
+
+// -- Variables
+$font-family-primary: "Satoshi", Arial, sans-serif;
+$font-family-heading: "Integral CF", Impact, Charcoal, sans-serif;
+
+$color-black: #000000;
+$color-white: #ffffff;
+$color-text-primary-dark: #000000;
+$color-text-secondary-dark: #333333;
+$color-text-light-dark: #555555;
+$color-text-placeholder-dark: rgba(0, 0, 0, 0.5);
+$color-background-light: #f0f0f0;
+$color-border-light: #eaeaea;
+$color-badge-background: #ff3333;
+$color-overlay-background: rgba(0, 0, 0, 0.5);
+
+// -- General Header Styles
+.site-header {
+  border-bottom: 1px solid $color-border-light;
+  background-color: $color-white;
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+// -- Header Top Section
+.header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 38px;
+  background-color: $color-black;
+  color: $color-white;
+  position: relative;
+  font-size: 14px;
+  font-family: $font-family-primary;
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: showFragment 1s forwards;
+
+  p {
+    margin: 0;
+  }
+
+  &__link {
+    color: $color-white;
+    text-decoration: underline;
+    font-weight: 500;
+    margin-left: 5px;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .clear-btn {
+    font-size: 20px;
+    position: absolute;
+    right: 40px;
+    cursor: pointer;
+    color: $color-white;
+    opacity: 0.8;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  @keyframes showFragment {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+// -- Navbar Wrapper (Main Navigation Area)
+.navbar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 82px;
+  box-sizing: border-box;
+  position: relative; // Mobil menyu uchun
+
+  // container klassi JSX da navbar-wrapper dan tashqarida bo'lishi kerak
+  // Agar container ichida bo'lsa, padding: 0; bo'ladi.
+
+  .navbar-brand-group {
+    display: flex;
+    align-items: center;
+    gap: 15px; // Mobil uchun ham ishlaydi, desktopda menyu bilan orasi kattaroq bo'ladi
+  }
+
+  .logo-link {
+    text-decoration: none;
+    color: $color-text-primary-dark;
+
+    .logo-text {
+      font-family: $font-family-heading;
+      font-weight: 700;
+      font-size: 28px;
+      margin: 0;
+      letter-spacing: -0.02em;
+    }
+  }
+
+  // Desktop Navigation Links
+  .content-ul.desktop-nav {
+    display: flex;
+    margin-left: 40px; // Logo va menyu orasidagi masofa (desktop)
+
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      list-style: none;
+      font-size: 16px;
+      margin: 0;
+      padding: 0;
+      font-family: $font-family-primary;
+
+      .nav-item {
+        .nav-link {
+          text-decoration: none;
+          color: $color-text-primary-dark;
+          padding: 8px 0;
+          position: relative;
+          transition: color 0.2s ease;
+          display: flex;
+          align-items: center;
+          font-weight: 400;
+
+          &:hover {
+            color: $color-text-light-dark;
+          }
+        }
+
+        &.dropdown-item .nav-link {
+          font-weight: 500;
+        }
+
+        .dropdown-icon {
+          margin-left: 4px;
+          font-size: 22px;
+        }
+      }
+    }
+  }
+
+  // Actions Group (Search for desktop, Icons)
+  .navbar-actions-group {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-left: auto; // O'ng tomonga surish uchun (agar desktop-nav bo'lsa)
+  }
+
+  .search-input.desktop-search {
+    display: flex;
+    align-items: center;
+    width: 420px;
+    height: 48px;
+    background-color: $color-background-light;
+    border-radius: 62px;
+    padding: 0 18px;
+    gap: 10px;
+
+    .search-icon {
+      font-size: 20px;
+      color: $color-text-placeholder-dark;
+    }
+
+    input {
+      flex: 1;
+      border: none;
+      font-size: 14px;
+      color: $color-text-secondary-dark;
+      outline: none;
+      background-color: transparent;
+      font-family: $font-family-primary;
+
+      &::placeholder {
+        color: $color-text-placeholder-dark;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .card-and-profile-icons {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    .action-icon {
+      font-size: 24px;
+      color: $color-text-primary-dark;
+      cursor: pointer;
+      transition: color 0.2s ease;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+
+      &:hover {
+        color: $color-text-light-dark;
+      }
+    }
+  }
+
+  .cart-icon-wrapper {
+    position: relative;
+
+    .cart-badge {
+      position: absolute;
+      top: -5px;
+      right: -8px;
+      background-color: $color-badge-background;
+      color: $color-white;
+      border-radius: 50%;
+      padding: 1px 5px;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 14px;
+      min-width: 15px;
+      height: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid $color-white;
+
+      &.new-item {
+        animation: pulse 0.8s infinite alternate;
+      }
+    }
+  }
+
+  .burger-icon,
+  .mobile-search-icon {
+    display: none; // Desktopda yashirin
+  }
+}
+
+
+/* ================= MOBILE STYLES ================= */
+@media (max-width: 768px) {
+  .header-top {
+    display: none;
+  }
+
+  .navbar-wrapper {
+    height: 60px;
+    padding: 0 15px; // Mobil uchun chap va o'ngdan padding
+
+    .navbar-brand-group {
+      gap: 10px;
+    }
+
+    .burger-icon {
+      display: flex;
+      font-size: 26px;
+      color: $color-text-primary-dark;
+      cursor: pointer;
+      padding: 5px;
+      margin-left: -5px;
+    }
+
+    .logo-link .logo-text {
+      font-size: 22px;
+    }
+
+    .content-ul.desktop-nav,
+    .search-input.desktop-search {
+      display: none !important;
+    }
+
+    .navbar-actions-group {
+      gap: 12px;
+      margin-left: auto; // Ikonka guruhini o'ngga surish
+    }
+
+    .card-and-profile-icons {
+      gap: 12px;
+
+      .action-icon {
+        font-size: 24px;
+      }
+
+      .mobile-search-icon {
+        display: flex;
+      }
+
+      .cart-icon-wrapper .cart-badge {
+        top: -6px;
+        right: -7px;
+        min-width: 15px;
+        height: 15px;
+        font-size: 9px;
+        line-height: 14px;
+        padding: 0 4px;
+      }
+    }
+  }
+
+  // Mobile Menu Overlay and Content
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $color-overlay-background;
+    z-index: 998; // .site-header dan pastroq, lekin boshqa kontentdan yuqori
+    display: flex;
+    // animation: fadeInOverlay 0.3s ease-in-out; // Agar overlay uchun animatsiya kerak bo'lsa
+  }
+
+  .mobile-menu-content {
+    background-color: $color-white;
+    width: 80%;
+    max-width: 300px;
+    height: 100%;
+    padding-top: 20px; // Menyuning o'zining tepasidan padding
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+    animation: slideInFromLeft 0.3s ease-in-out forwards;
+    overflow-y: auto;
+    box-sizing: border-box;
+
+    .mobile-menu-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      .mobile-menu-item {
+        border-bottom: 1px solid $color-border-light;
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .mobile-menu-link {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 16px 20px;
+          text-decoration: none;
+          font-size: 16px;
+          color: $color-text-secondary-dark;
+          font-family: $font-family-primary;
+          font-weight: 500;
+          transition: background-color 0.2s ease, color 0.2s ease;
+
+          &:hover,
+          &:focus {
+            background-color: color.adjust($color-background-light, $lightness: 5%); // TUZATILGAN
+            color: $color-text-primary-dark;
+          }
+
+          .dropdown-icon {
+            font-size: 20px;
+            color: #777;
+          }
+        }
+      }
+    }
+  }
+
+  @keyframes slideInFromLeft {
+    from {
+      transform: translateX(-100%);
+    }
+
+    to {
+      transform: translateX(0);
+    }
+  }
+
+  // @keyframes fadeInOverlay { // Agar kerak bo'lsa
+  //   from { opacity: 0; }
+  //   to { opacity: 1; }
+  // }
+}
+
+// Pulse animation for cart badge
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.6);
+  }
+
+  70% {
+    transform: scale(1.15);
+    box-shadow: 0 0 6px 9px rgba(255, 51, 51, 0);
+  }
+
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 51, 51, 0);
+  }
+}

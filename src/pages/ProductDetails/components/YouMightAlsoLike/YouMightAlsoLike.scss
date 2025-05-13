@@ -1,0 +1,36 @@
+.related-products-section {
+    // border-top: 1px solid #f1f3f5; /* Ajratuvchi chiziq (agar tablardan keyin bo'lmasa) */
+    padding-top: 40px;
+    margin-top: 60px; // Sharhlar bo'limidan keyin kattaroq masofa
+
+    h2 {
+        text-align: center;
+        font-size: 26px;
+        /* Kattaroq sarlavha */
+        margin-bottom: 35px;
+        font-weight: 700;
+        text-transform: uppercase;
+        /* Kattaroq harflar */
+        letter-spacing: 1px;
+    }
+
+    .related-products-grid {
+        display: grid;
+        /* Rasmga mos 4 ustunli layout */
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+        /* Kartochkalar orasidagi masofa */
+
+        /* Planchet uchun 2 ustunli */
+        @media (max-width: 992px) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        /* Mobil uchun 1 ustunli (yoki 2 ustunli qoldirish ham mumkin) */
+        @media (max-width: 576px) {
+            grid-template-columns: repeat(2, 1fr); // Mobil uchun 2 ustun
+            gap: 10px;
+        }
+    }
+}

@@ -1,0 +1,156 @@
+/* =============================================== */
+/*            Product Tabs Styles                  */
+/* =============================================== */
+
+.product-additional-info {
+    margin-top: 50px;
+    /* Yuqoridagi MainDetails dan masofa */
+}
+
+/* --- Tablar Stili --- */
+.product-tabs {
+    display: flex;
+    gap: 25px;
+    /* Tablar orasidagi masofa */
+    margin-bottom: 0;
+    border-bottom: 1px solid #e0e0e0;
+    /* Tablar ostidagi umumiy chiziq */
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 15px 5px;
+    /* Vertikal padding, gorizontal kichikroq */
+    font-size: 16px;
+    /* O'zgartirishingiz mumkin */
+    font-weight: 500;
+    color: #6c757d;
+    /* Noaktiv tab rangi */
+    cursor: pointer;
+    position: relative;
+    margin-bottom: -1px;
+    /* Chiziq bilan ustma-ust tushishi uchun */
+    transition: color 0.2s ease, border-color 0.2s ease;
+    border-bottom: 3px solid transparent;
+    /* Boshida shaffof chegara */
+
+    &:hover {
+        color: #343a40;
+        /* Hover rangi */
+    }
+
+    &.active {
+        color: #000;
+        /* Aktiv tab rangi */
+        font-weight: 600;
+        border-bottom-color: #000;
+        /* Aktiv tab ostidagi qora chiziq */
+    }
+}
+
+.tab-content {
+    padding-top: 30px;
+    /* Tab chizig'idan keyingi bo'sh joy */
+}
+
+.tab-pane {
+    h4 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    p {
+        line-height: 1.6;
+        color: #495057;
+    }
+}
+
+/* --- Reviews Bo'limi Stili (ProductTabs.scss ichida) --- */
+.reviews-section {
+    .reviews-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 15px;
+
+        h3 {
+            margin: 0;
+            font-size: 22px;
+            font-weight: 600;
+
+            .review-count {
+                font-weight: 500;
+                color: #6c757d;
+                font-size: 18px;
+                margin-left: 8px;
+            }
+        }
+
+        .reviews-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            .sort-select {
+                padding: 8px 12px;
+                border-radius: 8px;
+                border: 1px solid #ced4da;
+                background-color: #fff;
+                font-size: 14px;
+            }
+
+            .write-review-btn {
+                background-color: #000;
+                color: #fff;
+                border: none;
+                padding: 10px 22px;
+                border-radius: 25px;
+                font-weight: 500;
+                font-size: 14px;
+                cursor: pointer;
+                transition: opacity 0.2s ease;
+
+                &:hover {
+                    opacity: 0.85;
+                }
+            }
+        }
+    }
+
+    .reviews-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+
+        @media (max-width: 992px) {
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+    }
+
+    .load-more-container {
+        text-align: center;
+        margin-top: 35px;
+    }
+
+    .load-more-btn {
+        padding: 12px 35px;
+        border: 1px solid #adb5bd;
+        background-color: transparent;
+        color: #212529;
+        border-radius: 30px;
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+            background-color: #f1f3f5;
+            border-color: #adb5bd;
+        }
+    }
+}

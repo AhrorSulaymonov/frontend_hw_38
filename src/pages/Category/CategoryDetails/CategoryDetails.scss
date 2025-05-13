@@ -1,0 +1,238 @@
+// src/pages/Category/CategoryDetails.scss
+
+// --- Variables (optional, or import from global styles) ---
+$sidebar-width-mobile: 280px;
+$sidebar-transition: transform 0.3s ease-in-out;
+$overlay-background: rgba(0, 0, 0, 0.5);
+$color-text-primary: #000;
+$color-text-secondary: #555;
+$color-border-light: #e0e0e0;
+$color-background-button: #f0f0f0;
+$color-active-filter: #e9ecef; // Active filter item background
+
+// --- Main Page Styles ---
+.category-details-page {
+    padding-bottom: 40px; // Pastdan joy
+
+    // Mobile-specific header for category title and filter toggle
+    .category-header-mobile {
+        display: none; // Hidden on desktop
+
+        h2 {
+            font-size: 22px;
+            font-weight: 600;
+            color: $color-text-primary;
+            margin: 0;
+        }
+
+        .mobile-filter-toggle-btn {
+            background: none;
+            border: 1px solid $color-border-light;
+            border-radius: 50%; // Dumaloq tugma
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: $color-text-primary;
+            transition: background-color 0.2s ease;
+
+            svg {
+                font-size: 20px;
+            }
+
+            &:hover {
+                background-color: $color-background-button;
+            }
+
+            span {
+                // Agar filter matni kerak bo'lsa
+                display: none; // Rasmdagidek faqat ikonka
+            }
+        }
+
+        @media (max-width: 768px) {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px; // Kontentdan oldin joy
+            padding: 0 15px; // Agar container tashqarida bo'lsa
+            // Agar .container category-details-page da bo'lsa, bu padding shart emas
+        }
+    }
+
+
+    .category-details-content {
+        display: flex;
+        gap: 30px;
+        margin-top: 20px; // Breadcrumbs dan keyin
+        position: relative; // For overlay and sidebar positioning
+
+        // Sidebar Styles (Desktop and Mobile Transition Base)
+        &__sidebar {
+            flex-shrink: 0;
+            width: 295px; // Desktop sidebar width (FilterSidebar.scss dan ham kelishi mumkin)
+
+            @media (max-width: 768px) {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: $sidebar-width-mobile;
+                max-width: 90%; // Maksimal kenglik
+                background-color: #fff;
+                z-index: 1001; // Overlay ustida
+                transform: translateX(-105%); // Boshida to'liq yashirin
+                transition: $sidebar-transition;
+                overflow-y: auto;
+                padding-top: 0; // Header allaqachon bor
+                box-shadow: 3px 0px 15px rgba(0, 0, 0, 0.1);
+
+                &.open {
+                    transform: translateX(0);
+                }
+            }
+        }
+
+        // Mobile Filter Specific Header (inside sidebar)
+        .mobile-filter-header {
+            display: none; // Hidden on desktop
+
+            @media (max-width: 768px) {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 15px 20px; // Ichki padding
+                border-bottom: 1px solid $color-border-light;
+                background-color: #fff; // Orqa fon
+                // position: sticky; // Agar scroll bo'lganda tepada qolishi kerak bo'lsa
+                // top: 0;
+                // z-index: 10;
+
+                h3 {
+                    font-size: 18px;
+                    font-weight: 600;
+                    color: $color-text-primary;
+                    margin: 0;
+                }
+
+                .mobile-filter-close-btn {
+                    background: none;
+                    border: none;
+                    font-size: 24px;
+                    color: $color-text-secondary;
+                    cursor: pointer;
+                    padding: 5px;
+                    line-height: 1;
+
+                    &:hover {
+                        color: $color-text-primary;
+                    }
+                }
+            }
+        }
+
+
+        // Mobile Filter Overlay
+        .mobile-filter-overlay {
+            display: none;
+
+            @media (max-width: 768px) {
+
+                // .category-details-content__sidebar.open ~ & { // Bu ishlamasligi mumkin
+                //   display: block; // Agar sidebar ochiq bo'lsa overlayni ko'rsatish
+                // }
+                // JSX da shartli render qilingani uchun, bu yerda faqat stil
+                &.active {
+                    // Agar JSX da .active klassi qo'shilsa
+                    display: block;
+                }
+
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: $overlay-background;
+                z-index: 1000; // Sidebar ostida
+                // animation: fadeInOverlay 0.3s ease; // Ixtiyoriy
+            }
+        }
+
+
+        // Products Area
+        &__products {
+            flex-grow: 1;
+
+            .products-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 25px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid $color-border-light;
+
+                &.desktop-only-header {
+
+                    // Desktop sarlavhasini mobilda yashirish
+                    @media (max-width: 768px) {
+                        display: none;
+                    }
+                }
+
+                h2 {
+                    margin: 0;
+                    font-size: 24px; // Desktop sarlavha o'lchami
+                    font-weight: 600;
+                    color: $color-text-primary;
+                }
+
+                &__right {
+                    display: flex;
+                    align-items: center;
+                    gap: 20px;
+                }
+
+                &__info {
+                    font-size: 14px;
+                    color: $color-text-secondary;
+                }
+
+                // Mobil filter ochish tugmasi endi .category-header-mobile ichida
+            }
+
+            .products-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); // Kartochka minimal kengligi
+                gap: 20px; // Kartochkalar orasi
+
+                @media (max-width: 576px) {
+                    // Kichik mobil uchun
+                    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); // Yoki 2 ta ustun
+                    gap: 15px;
+                }
+            }
+
+            .loading-text,
+            .error-text,
+            .no-products-text {
+                text-align: center;
+                padding: 50px 0;
+                font-size: 1.1em;
+                color: #777;
+            }
+
+            .error-text {
+                color: red;
+            }
+        }
+
+        // Paginatsiya stillari (avvalgi javobdagidek, o'zgartirish shart emas)
+        // .pagination {
+        //     // ... (avvalgi pagination stillari)
+        // }
+    }
+}
+
+// @keyframes fadeInOverlay { from { opacity: 0; } to { opacity: 1; } }

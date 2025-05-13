@@ -1,0 +1,319 @@
+.main-details {
+    display: flex;
+    gap: 40px; // Galereya va info orasidagi masofa
+    margin-top: 20px;
+
+    @media (max-width: 992px) {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    &__gallery {
+        display: flex;
+        gap: 20px;
+        // Asosiy rasm va thumbnaillar vertikal cho'zilishi uchun
+        align-items: stretch; // Bu default bo'lishi mumkin, lekin aniqlik uchun
+
+        @media (max-width: 768px) {
+            flex-direction: column-reverse;
+        }
+    }
+
+    &__thumbnails {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 120px;
+        flex-shrink: 0;
+
+        @media (max-width: 768px) {
+            flex-direction: row;
+            width: 100%;
+            height: auto;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            gap: 10px;
+        }
+
+        .thumbnail-item {
+            flex: 1; // Vertikal bo'sh joyni teng egallash
+            min-height: 0; // Content itemni moslashuvchan qilish
+            width: 100%;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.2s ease;
+            position: relative; // Rasm joylashuvi uchun
+            background-color: #f0f0f0;
+            // Aspect-ratio bu yerda ham yordam berishi mumkin, lekin flex:1 asosiy
+            aspect-ratio: 1 / 1; // Kvadrat thumbnail
+
+            img {
+                position: absolute; // Bu yerda absolute qolishi mumkin
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            &.active {
+                border-color: #000;
+            }
+
+            &:hover:not(.active) {
+                border-color: #ccc;
+            }
+
+            @media (max-width: 768px) {
+                flex: 0 0 80px; // Mobil uchun flex: 1 kerak emas
+                min-width: 80px;
+                height: 80px;
+                border-radius: 8px;
+                aspect-ratio: unset; // Mobil uchun aspect-ratio kerak emas
+            }
+        }
+    }
+
+    &__main-image {
+        flex-grow: 1;
+        background-color: #f8f9fa;
+        border-radius: 16px;
+        overflow: hidden;
+        display: flex; // Flex konteyner sifatida saqlaymiz
+        align-items: center;
+        justify-content: center;
+        position: relative; // Bu kerak emas bo'lishi mumkin, lekin qoldiramiz
+        // aspect-ratio: 1 / 1; // Buni olib turamiz, balki img o'lchami yetarlidir
+
+        img {
+            // position: absolute; // !!! MUHIM: Buni olib tashladik !!!
+            display: block; // Ortiqcha bo'sh joyni olib tashlash
+            width: 100%; // Konteyner kengligini egallash
+            height: 100%; // Konteyner balandligini egallash
+            object-fit: contain; // Rasm sig'ishi va nisbatini saqlash uchun
+            max-width: 100%; // Konteynerdan chiqib ketmasligi uchun
+            max-height: 600px; // Maksimal balandlikni cheklash (ixtiyoriy)
+        }
+    }
+
+    // --- Info qismi uchun stillar (o'zgartirilmagan) ---
+    &__info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+
+        .info__title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            line-height: 1.3;
+        }
+
+        .info__rating-stars {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+
+            .star-icon {
+                font-size: 18px;
+                color: #d1d1d1;
+
+                &.filled {
+                    color: #ffc107;
+                }
+            }
+
+            .rating-value {
+                font-size: 14px;
+                color: #555;
+                margin-left: 5px;
+            }
+        }
+
+        .info__price {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            margin-bottom: 15px;
+
+            .current-price {
+                font-size: 26px;
+                font-weight: 700;
+                color: #000;
+            }
+
+            .old-price {
+                font-size: 20px;
+                color: #888;
+                text-decoration: line-through;
+            }
+
+            .discount-badge {
+                background-color: #fdecec;
+                color: #e53e3e;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 14px;
+                font-weight: 500;
+            }
+        }
+
+        .info__description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .info__options-group {
+            margin-bottom: 10px;
+
+            .options-label {
+                font-size: 14px; // Kichikroq label
+                font-weight: 600;
+                margin-bottom: 12px; // Ko'proq joy
+                color: #333;
+                text-transform: uppercase;
+            }
+        }
+
+        .color-selector {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+
+            .color-option {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                border: 2px solid #eee;
+                cursor: pointer;
+                transition: border-color 0.2s ease, transform 0.2s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0;
+
+                .check-icon {
+                    color: white;
+                    font-size: 18px;
+                    text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5); // Ko'rinishini yaxshilash
+                }
+
+                &:hover {
+                    border-color: #bbb;
+                }
+
+                &.selected {
+                    border-color: #000;
+                    transform: scale(1.1);
+                }
+            }
+        }
+
+        .size-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            .size-option {
+                padding: 8px 16px;
+                border: 1px solid #ddd;
+                border-radius: 62px;
+                background-color: #f8f9fa;
+                color: #555;
+                cursor: pointer;
+                transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+                font-size: 14px;
+                font-weight: 500;
+                min-width: 45px; // Minimal kenglik
+                text-align: center; // Markazlash
+
+                &:hover {
+                    background-color: #eee;
+                    border-color: #ccc;
+                }
+
+                &.selected {
+                    background-color: #000;
+                    color: #fff;
+                    border-color: #000;
+                }
+            }
+        }
+
+        .info__divider {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 25px 0;
+        }
+
+        .info__actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+
+            @media (max-width: 480px) {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .quantity-selector {
+                display: flex;
+                align-items: center;
+                border-radius: 62px;
+                overflow: hidden;
+                background-color: #f8f9fa;
+                padding: 4px;
+
+                button {
+                    background-color: transparent;
+                    border: none;
+                    padding: 10px 15px;
+                    cursor: pointer;
+                    font-size: 14px;
+                    color: #333;
+                    transition: color 0.2s ease;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    line-height: 1;
+
+                    &:hover {
+                        color: #000;
+                    }
+
+                    &:disabled {
+                        color: #aaa;
+                        cursor: not-allowed;
+                    }
+                }
+
+                span {
+                    padding: 0 10px;
+                    font-size: 16px;
+                    min-width: 25px;
+                    text-align: center;
+                    font-weight: 600;
+                    color: #000;
+                }
+            }
+
+            // Button stillari componentning o'zida yoki global bo'lishi kerak
+            // Masalan:
+            .button--primary {
+                // Agar Button component shu classni ishlatsa
+                flex-grow: 1; // Kerakli bo'sh joyni egallash
+
+                @media (max-width: 480px) {
+                    width: 100%;
+                    flex-grow: 0; // Mobil uchun grow kerak emas
+                }
+            }
+        }
+    } }

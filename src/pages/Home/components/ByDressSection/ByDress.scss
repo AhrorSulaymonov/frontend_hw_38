@@ -1,0 +1,323 @@
+// src/pages/Home/components/ByDressSection/ByDress.scss
+@use "sass:color"; // Sass color modulini import qilish
+
+// -- Variables
+$font-family-heading: "Integral CF", Impact, Charcoal, sans-serif; // Yoki "Poppins"
+$font-family-primary: "Satoshi", Arial, sans-serif;
+$color-text-dark: #000000;
+$color-text-card-name-desktop: #ffffff;
+$color-text-card-name-mobile: #000000;
+$color-background-section-desktop: #f0f0f0;
+$color-background-card-mobile: #ffffff; // <<-- $color-white shu yerda
+$color-star-filled: #ffc107;
+$color-border-review: rgba(0, 0, 0, 0.1);
+$color-white: #ffffff; // $color-white ni qo'shdim, agar boshqa joyda ham kerak bo'lsa
+$color-text-secondary: rgba(0, 0, 0, 0.6); // Sharhlar matni uchun
+
+$border-radius-section-desktop: 40px;
+$border-radius-card-desktop: 20px;
+$border-radius-card-mobile: 16px;
+$border-radius-image-mobile: 12px;
+
+// -- Umumiy Section Container
+.by-dress-section-container {
+    margin-bottom: 60px;
+}
+
+// -- Dress Style Section
+.dress-style-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: $color-background-section-desktop;
+    border-radius: $border-radius-section-desktop;
+    padding: 60px 40px;
+    margin-top: 70px;
+
+    >h3 {
+        // MainTitle komponenti h3 qaytarsa
+        font-family: $font-family-heading;
+        font-size: 48px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: $color-text-dark;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+}
+
+.dress-style-grid {
+    width: 100%;
+
+    &__desktop {
+        display: block;
+    }
+
+    &__mobile {
+        display: none;
+    }
+
+    .dress-style-grid__desktop {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 1100px;
+        margin: 0 auto;
+
+        .img-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .desktop-card-link {
+            display: block;
+            position: relative;
+            border-radius: $border-radius-card-desktop;
+            overflow: hidden;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: scale(1.03);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            }
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            &__name {
+                position: absolute;
+                top: 25px;
+                left: 25px;
+                font-family: $font-family-primary;
+                font-size: 24px;
+                font-weight: 700;
+                color: $color-text-card-name-desktop;
+            }
+
+            &--rect {
+                width: 408px;
+                height: 289px;
+            }
+
+            &--wide {
+                width: 684px;
+                height: 289px;
+            }
+        }
+    }
+}
+
+/* ================= MOBIL VERSIYA ================= */
+@media (max-width: 768px) {
+    .dress-style-wrapper {
+        background-color: transparent;
+        border-radius: 0;
+        padding: 30px 0;
+        margin-top: 40px;
+
+        >h3 {
+            font-size: 26px;
+            margin-bottom: 30px;
+        }
+    }
+
+    .dress-style-grid {
+        &__desktop {
+            display: none !important;
+        }
+
+        &__mobile {
+            display: grid !important;
+            grid-template-columns: 1fr;
+            gap: 16px;
+            width: 100%;
+            max-width: 340px;
+            margin: 0 auto;
+        }
+    }
+
+    .dress-style-card-mobile {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        background-color: $color-background-card-mobile; // Bu $color-white ni ishlatadi
+        border-radius: $border-radius-card-mobile;
+        padding: 16px;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: translateY(-3px);
+        }
+
+        &__image-container {
+            width: 80px;
+            height: 80px;
+            flex-shrink: 0;
+            border-radius: $border-radius-image-mobile;
+            overflow: hidden;
+            margin-right: 16px;
+        }
+
+        &__image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        &__name {
+            font-family: $font-family-primary;
+            font-size: 18px;
+            font-weight: 600;
+            color: $color-text-card-name-mobile;
+            text-align: left;
+            flex-grow: 1;
+        }
+    }
+}
+
+// -- Customer Reviews Section
+.customer-reviews-section {
+    margin-top: 80px;
+    margin-bottom: 100px;
+
+    .customer-reviews__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+
+        .customer-reviews__title {
+            font-family: $font-family-heading;
+            font-size: 48px;
+            font-weight: 700;
+            color: $color-text-dark;
+            margin: 0;
+        }
+
+        .customer-reviews__navigation {
+            display: flex;
+            gap: 15px;
+
+            .nav-arrow {
+                font-size: 28px;
+                color: $color-text-dark;
+                cursor: pointer;
+                transition: color 0.2s ease;
+
+                &:hover {
+                    // color: lighten($color-text-dark, 30%); // Eski kod
+                    color: color.adjust($color-text-dark, $lightness: 30%); // YANGI KOD
+                }
+            }
+        }
+    }
+
+    .customer-reviews__list {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 20px;
+    }
+
+    .review-card-item {
+        border: 1px solid $color-border-review;
+        border-radius: $border-radius-card-desktop;
+        padding: 25px;
+        background-color: $color-white; // Bu yerda ham $color-white ishlatiladi
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        &__stars {
+            display: flex;
+            gap: 3px;
+
+            .star-icon {
+                font-size: 22px;
+                color: #d1d5db;
+
+                &.filled {
+                    color: $color-star-filled;
+                }
+            }
+        }
+
+        &__author {
+            font-family: $font-family-primary;
+            font-size: 18px;
+            font-weight: 600;
+            color: $color-text-dark;
+            margin: 0;
+            display: flex;
+            align-items: center;
+
+            .verified-icon {
+                font-size: 18px;
+                margin-left: 8px;
+                color: #22c55e;
+            }
+        }
+
+        &__text {
+            font-family: $font-family-primary;
+            font-size: 15px;
+            line-height: 1.6;
+            color: $color-text-secondary; // $color-text-secondary ni aniqlang
+            margin: 0;
+        }
+    }
+
+    // Mobil uchun Customer Reviews
+    @media (max-width: 768px) {
+        margin-top: 60px;
+        margin-bottom: 80px;
+
+        .customer-reviews__header {
+            flex-direction: column;
+            gap: 20px;
+            text-align: center;
+            margin-bottom: 30px;
+
+            .customer-reviews__title {
+                font-size: 28px;
+            }
+
+            .customer-reviews__navigation {
+                .nav-arrow {
+                    font-size: 24px;
+                }
+            }
+        }
+
+        .customer-reviews__list {
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+
+        .review-card-item {
+            padding: 20px;
+
+            &__stars .star-icon {
+                font-size: 20px;
+            }
+
+            &__author {
+                font-size: 16px;
+
+                .verified-icon {
+                    font-size: 16px;
+                }
+            }
+
+            &__text {
+                font-size: 14px;
+            }
+        }
+    }
+}

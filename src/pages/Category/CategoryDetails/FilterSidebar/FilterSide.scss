@@ -1,0 +1,230 @@
+// src/pages/Category/CategoryDetails/FilterSidebar/FilterSide.scss
+@use "sass:color";
+
+// --- Variables ---
+$font-family-filter: "Satoshi", Arial, sans-serif;
+$color-text-filter-title: #000000;
+$color-text-filter-item: #333333; // Rasmdagi shrift rangiga mos
+$color-text-filter-item-active: #000000;
+$color-border-filter: #e0e0e0; // Yupqa chiziq
+$color-filter-arrow: #757575; // Strelka rangi (rasmga mos)
+$color-filter-apply-btn-bg: #000000;
+$color-filter-apply-btn-text: #ffffff;
+
+$color-slider-thumb: #000000;
+$color-slider-range: #000000;
+$color-slider-track: #e0e0e0;
+
+$color-size-btn-bg: #f0f0f0;
+$color-size-btn-text: #000000;
+$color-size-btn-border: transparent; // Chegarasiz, fon bilan bir xil
+$color-size-btn-selected-bg: #000000;
+$color-size-btn-selected-text: #ffffff;
+
+.filter-side-wrapper {
+    font-family: $font-family-filter;
+    width: 100%;
+    padding: 20px; // Mobil filter ichidagi umumiy padding
+    box-sizing: border-box; // Paddingni hisobga olish uchun
+
+    // Mobil uchun "Filters" sarlavhasi CategoryDetails.jsx da
+    // Desktop uchun sarlavha (FilterSidebar.jsx da kommentga olingan)
+    // .desktop-only-filter-header {
+    //   display: flex; // Agar desktopda ko'rsatilsa
+    //   justify-content: space-between;
+    //   align-items: center;
+    //   margin-bottom: 15px;
+    //   .filter-title { margin: 0; }
+    // }
+
+    .filter-title {
+        font-size: 16px;
+        font-weight: 700; // Qalinroq sarlavha
+        color: $color-text-filter-title;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .hr-line {
+        width: 100%;
+        height: 1px;
+        margin: 25px 0; // Oraliqni kattaroq qildim
+        background-color: $color-border-filter;
+    }
+
+    .accordion {
+        margin-bottom: 0;
+
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: 10px 0; // Sarlavha atrofida bosish maydoni
+
+            p.filter-title {
+                margin: 0;
+            }
+
+            .filter-arrow-toggle {
+                // Ochish/yopish strelkasi
+                font-size: 13px; // Kichikroq
+                color: $color-filter-arrow;
+                transition: transform 0.2s ease;
+            }
+        }
+
+        .accordion-body {
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding-top 0.3s ease-out, padding-bottom 0.3s ease-out;
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+
+            &.open {
+                max-height: 600px; // Kontent sig'ishi uchun
+                padding-top: 15px; // Ochilganda ichki joy
+                padding-bottom: 10px;
+            }
+        }
+    }
+
+    // Kategoriyalar uchun (akkordionsiz, to'g'ridan-to'g'ri linklar)
+    .filter-category-accordion {
+        .accordion-body {
+            // Har doim ochiq
+            max-height: none;
+            padding: 0;
+        }
+
+        .filter-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0; // Oraliqni kattaroq qildim
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 400; // Oddiy qalinlik
+            color: $color-text-filter-item; // Rasmdagi rangga mos
+            transition: color 0.2s ease, font-weight 0.2s ease;
+
+            &:hover,
+            &.active {
+                color: $color-text-filter-item-active; // Aktiv/hoverda qora
+                font-weight: 500; // Biroz qalinroq
+            }
+
+            .filter-arrow {
+                // FontAwesome uchun .fas.fa-chevron-right
+                font-size: 11px; // Kichikroq strelka
+                color: $color-filter-arrow;
+            }
+        }
+    }
+
+    // Narx Slideri
+    .price-range-slider {
+        margin-top: 15px;
+        margin-bottom: 30px;
+
+        .range-slider__thumb {
+            background-color: $color-slider-thumb !important;
+            border: none; // Chegarasiz (rasmga mos)
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); // Soya
+            width: 20px; // Katta tutqich
+            height: 20px;
+            margin-top: -8px; // Track bilan tekislash
+            border-radius: 50%; // To'liq dumaloq
+
+            &:focus {
+                outline: none;
+                box-shadow: 0 0 0 4px rgba($color-slider-thumb, 0.3);
+            }
+        }
+
+        .range-slider__range {
+            background-color: $color-slider-range !important;
+            height: 3px; // Yupqaroq chiziq
+            border-radius: 1.5px;
+        }
+
+        .range-slider__track {
+            background-color: $color-slider-track !important;
+            height: 3px;
+            border-radius: 1.5px;
+        }
+
+        .range-slider-value {
+            // Tutqich ostidagi qiymat
+            font-weight: 500;
+            font-size: 12px;
+            position: absolute;
+            top: 100%; // Tutqich ostida
+            left: 50%;
+            transform: translateX(-50%) translateY(4px); // Joylashuvini sozlash
+            color: $color-text-filter-item; // Matn rangi
+            white-space: nowrap;
+        }
+    }
+
+    // Rang Filteri
+    // .color-accordion .accordion-body {
+    //     // ColorPicker.scss stilni boshqaradi
+    // }
+
+    // O'lcham Filteri
+    .size-accordion .accordion-body {
+        .size-filter-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px; // Rasmga mos
+        }
+
+        .size-option-btn {
+            background-color: $color-size-btn-bg;
+            color: $color-size-btn-text;
+            border: 1px solid $color-size-btn-border;
+            border-radius: 8px; // Rasmga mos
+            padding: 8px 14px; // Rasmga mos
+            font-size: 14px;
+            font-weight: 400; // Rasmga mos (qalin emas)
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 45px;
+            text-align: center;
+            line-height: 1.2;
+
+            &:hover {
+                border-color: color.adjust($color-size-btn-border, $lightness: -15%);
+                background-color: color.adjust($color-size-btn-bg, $lightness: -5%);
+            }
+
+            &.selected {
+                background-color: $color-size-btn-selected-bg;
+                color: $color-size-btn-selected-text;
+                border-color: $color-size-btn-selected-bg;
+                font-weight: 500; // Tanlanganda qalinroq
+            }
+        }
+    }
+
+    // "Dress Style" bo'limi uchun stillar olib tashlandi
+
+    .apply-filter-btn {
+        width: 100%;
+        padding: 15px; // Kattaroq padding
+        background-color: $color-filter-apply-btn-bg;
+        color: $color-filter-apply-btn-text;
+        border: none;
+        border-radius: 8px; // Rasmga mos
+        font-size: 16px;
+        font-weight: 500;
+        cursor: pointer;
+        margin-top: 30px; // Yuqoridan ko'proq joy
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.85;
+        }
+    }
+}

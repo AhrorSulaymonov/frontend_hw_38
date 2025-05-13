@@ -1,0 +1,219 @@
+/* =============================================== */
+/*          Product Detail Page Styles             */
+/* =============================================== */
+
+.product-detail-page {
+    max-width: 1200px;
+    /* Sahifaning maksimal kengligi */
+    margin: 0 auto;
+    /* Markazga joylashtirish */
+    padding: 20px 15px;
+    /* Yuqori/past va yonlardan bo'sh joy */
+    font-family: sans-serif;
+    /* Yoki loyihangizdagi asosiy shrift */
+}
+
+/* --- Yuklanish va Xatolik Holatlari --- */
+.product-detail-loading,
+.product-detail-error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 50vh;
+    /* Kamida yarim ekran balandligi */
+    font-size: 1.1em;
+    /* Matn o'lchami */
+    color: #666;
+    /* Kulrang matn */
+    text-align: center;
+}
+
+.product-detail-error {
+    color: #e53e3e;
+    /* Qizil rang */
+    font-weight: 500;
+}
+
+/* --- Asosiy Bo'limdan Keyingi Qo'shimcha Bo'limlar --- */
+.product-additional-info,
+.related-products-section {
+    margin-top: 50px;
+    /* Asosiy detal va tablar/o'xshash mahsulotlar orasidagi masofa */
+}
+
+/* --- Tablar Stili --- */
+.product-tabs {
+    display: flex;
+    gap: 25px;
+    /* Tablar orasidagi masofa */
+    margin-bottom: 0;
+    border-bottom: 1px solid #e0e0e0;
+    /* Tablar ostidagi umumiy chiziq */
+}
+
+.tab-button {
+    background: none;
+    border: none;
+    padding: 15px 5px;
+    /* Vertikal padding, gorizontal kichikroq */
+    font-size: 16px;
+    /* O'zgartirishingiz mumkin */
+    font-weight: 500;
+    color: #6c757d;
+    /* Noaktiv tab rangi (Bootstrap gray) */
+    cursor: pointer;
+    position: relative;
+    /* Pastki chiziq uchun */
+    margin-bottom: -1px;
+    /* Chiziq bilan ustma-ust tushishi uchun */
+    transition: color 0.2s ease, border-color 0.2s ease;
+    border-bottom: 3px solid transparent;
+    /* Boshida shaffof chegara */
+
+    &:hover {
+        color: #343a40;
+        /* Hover rangi (Bootstrap dark gray) */
+    }
+
+    &.active {
+        color: #000;
+        /* Aktiv tab rangi */
+        font-weight: 600;
+        border-bottom-color: #000;
+        /* Aktiv tab ostidagi qora chiziq */
+    }
+}
+
+// .tabs-divider {
+//   /* Agar .product-tabs da border-bottom bo'lsa, bu kerak emas */
+//   /* border: none;
+//   border-top: 1px solid #e0e0e0;
+//   margin-top: 0; */
+//   margin-bottom: 30px; /* Kontentdan oldingi masofa */
+// }
+
+.tab-content {
+    padding-top: 30px;
+    /* Tab chizig'idan keyingi bo'sh joy */
+}
+
+.tab-pane {
+
+    /* Har bir tab paneli uchun umumiy stil (agar kerak bo'lsa) */
+    h4 {
+        /* Tab panellari ichidagi sarlavhalar */
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    p {
+        line-height: 1.6;
+        color: #495057;
+        /* Matn rangi */
+    }
+}
+
+/* --- Reviews Bo'limi Stili --- */
+.reviews-section {
+    .reviews-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+        gap: 15px;
+
+        h3 {
+            margin: 0;
+            font-size: 22px;
+            /* Kattaroq sarlavha */
+            font-weight: 600;
+
+            .review-count {
+                font-weight: 500;
+                color: #6c757d;
+                /* Kulrangroq */
+                font-size: 18px;
+                margin-left: 8px;
+            }
+        }
+
+        .reviews-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+
+            .sort-select {
+                padding: 8px 12px;
+                border-radius: 8px;
+                /* Yumshoqroq burchak */
+                border: 1px solid #ced4da;
+                /* Bootstrap input border */
+                background-color: #fff;
+                font-size: 14px;
+            }
+
+            .write-review-btn {
+                background-color: #000;
+                color: #fff;
+                border: none;
+                padding: 10px 22px;
+                /* Kengroq tugma */
+                border-radius: 25px;
+                /* Yumaloq tugma */
+                font-weight: 500;
+                font-size: 14px;
+                cursor: pointer;
+                transition: opacity 0.2s ease;
+
+                &:hover {
+                    opacity: 0.85;
+                }
+            }
+        }
+    }
+
+    .reviews-list {
+        display: grid;
+        /* Ikki ustunli layout */
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+        /* Sharhlar orasidagi masofa */
+
+        /* Planchet va kichikroq ekranlar uchun bir ustunli */
+        @media (max-width: 992px) {
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+    }
+
+    .load-more-container {
+        text-align: center;
+        margin-top: 35px;
+    }
+
+    .load-more-btn {
+        padding: 12px 35px;
+        /* Kattaroq tugma */
+        border: 1px solid #adb5bd;
+        /* Kulrang chegara */
+        background-color: transparent;
+        /* Orqa fonsiz */
+        color: #212529;
+        /* To'q matn */
+        border-radius: 30px;
+        /* To'liq yumaloq */
+        font-weight: 600;
+        font-size: 15px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+            background-color: #f1f3f5;
+            /* Och kulrang fon hoverda */
+            border-color: #adb5bd;
+        }
+    }
+}
+

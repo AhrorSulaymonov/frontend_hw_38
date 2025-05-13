@@ -1,0 +1,487 @@
+// src/layout/Footer/Footer.scss
+
+@use "sass:color"; // Sass color modulini import qilish
+
+// -- Variables
+$font-family-primary: "Satoshi", "Arial", "Helvetica Neue", sans-serif;
+$font-family-heading: "Integral CF", "Impact", "Arial Black", sans-serif;
+$font-family-logo: "Integral CF", Impact, Charcoal, sans-serif;
+
+$color-black: #000000;
+$color-white: #ffffff;
+$color-text-primary: #000000;
+$color-text-secondary: rgba(0, 0, 0, 0.6);
+$color-text-light: rgba(0, 0, 0, 0.4);
+$color-background-footer-main: #f0f0f0;
+$color-background-newsletter: $color-black;
+$color-border-light: #e0e0e0;
+$color-border-dark: rgba(0, 0, 0, 0.1);
+
+$breakpoint-lg: 1240px;
+$breakpoint-md: 768px;
+
+// Asosiy footer stili
+footer {
+  // Agar JSX da <footer className="footer"> bo'lsa, .footer deb yozing
+  position: relative;
+  font-family: $font-family-primary;
+  color: $color-text-secondary;
+  background-color: $color-background-footer-main;
+}
+
+.top-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  max-width: $breakpoint-lg;
+  border-radius: 20px;
+  background-color: $color-background-newsletter;
+  color: $color-white;
+  padding: 24px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 40px;
+  margin-bottom: -250px; // Dinamik sozlash kerak
+  position: relative;
+  z-index: 5;
+
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row;
+    padding: 36px 60px;
+    margin-top: 60px;
+    margin-bottom: -250px; // Dinamik sozlash kerak
+  }
+
+  h3 {
+    font-family: $font-family-heading;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.2;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+    flex-basis: 100%;
+
+    .hide-on-mobile {
+      display: none;
+    }
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 40px;
+      text-align: left;
+      flex-basis: 55%;
+
+      .hide-on-mobile {
+        display: block;
+      }
+    }
+  }
+
+  .top-footer-items {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    width: 100%;
+    max-width: 360px;
+
+    @media (min-width: $breakpoint-md) {
+      flex-basis: 40%;
+    }
+
+    .input-wrapper {
+      position: relative;
+      width: 100%;
+      background-color: $color-white;
+      border-radius: 62px;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      height: 48px;
+      box-sizing: border-box;
+
+      .input-icon {
+        color: $color-text-light;
+        margin-right: 10px;
+        font-size: 1.1rem;
+      }
+
+      input[type="email"] {
+        flex-grow: 1;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        font-family: $font-family-primary;
+        font-size: 14px;
+        color: $color-text-primary;
+        padding: 10px 0;
+
+        &::placeholder {
+          color: $color-text-light;
+          font-weight: 400;
+        }
+      }
+    }
+
+    button {
+      width: 100%;
+      height: 48px;
+      border-radius: 62px;
+      background-color: $color-white;
+      color: $color-black;
+      font-weight: 500;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background-color: color.adjust($color-white, $blackness: 5%);
+      }
+    }
+  }
+}
+
+.hero-footer {
+  padding-top: 120px; // .top-footer uchun joy (sozlash kerak!)
+  padding-bottom: 40px;
+
+  @media (min-width: $breakpoint-md) {
+    padding-top: 110px; // Desktop uchun (sozlash kerak!)
+  }
+
+  .container {
+    max-width: $breakpoint-lg;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+
+    @media (min-width: $breakpoint-md) {
+      padding-left: 40px;
+      padding-right: 40px;
+    }
+  }
+}
+
+.paragrif-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .footer-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 15px;
+
+    @media (min-width: $breakpoint-md) {
+      align-items: flex-start;
+      text-align: left;
+      flex: 0 0 280px;
+    }
+
+    span {
+      font-family: $font-family-logo;
+      font-size: 26px;
+      font-weight: 700;
+      color: $color-text-primary;
+      text-transform: uppercase;
+
+      @media (min-width: $breakpoint-md) {
+        font-size: 28px;
+      }
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 1.6;
+      color: $color-text-secondary;
+      max-width: 280px;
+      margin: 0 auto;
+
+      @media (min-width: $breakpoint-md) {
+        margin: 0;
+        max-width: none;
+
+        br {
+          display: block;
+        }
+      }
+
+      br.hide-on-mobile {
+        display: block;
+      }
+    }
+
+    .footer-icons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+
+      a {
+        color: $color-text-primary;
+        font-size: 20px; // react-icons uchun bu ishlamaydi, JSX da size berish kerak
+
+        // Agar FontAwesome bo'lsa ishlaydi
+        svg {
+          // react-icons uchun
+          width: 20px;
+          height: 20px;
+        }
+
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: color.adjust($color-text-primary, $lightness: -20%); // darken o'rniga
+        }
+      }
+    }
+  }
+
+  .footer-right {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 15px;
+    width: 100%;
+
+    @media (min-width: $breakpoint-md) {
+      display: flex;
+      justify-content: space-between;
+      flex-grow: 1;
+      gap: 20px;
+      width: auto;
+    }
+
+    .footer-paragrif {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: center;
+
+      @media (min-width: $breakpoint-md) {
+        text-align: left;
+        gap: 10px;
+      }
+
+      .column-title {
+        font-size: 14px;
+        font-weight: 500;
+        color: $color-text-primary;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+
+        @media (min-width: $breakpoint-md) {
+          font-size: 16px;
+          margin-bottom: 8px;
+        }
+      }
+
+      p:not(.column-title),
+      a {
+        font-size: 13px;
+        color: $color-text-secondary;
+        text-decoration: none;
+        cursor: pointer;
+        transition: color 0.2s ease;
+        margin: 0;
+
+        &:hover {
+          color: $color-text-primary;
+        }
+
+        @media (min-width: $breakpoint-md) {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
+hr {
+  // Yoki .footer__divider klassi bilan
+  border: 0;
+  border-top: 1px solid $color-border-dark;
+  margin: 30px 0;
+
+  @media (min-width: $breakpoint-md) {
+    margin: 40px 0;
+  }
+}
+
+.footer-finish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  p.copyright-text {
+    color: $color-text-secondary;
+    font-size: 12px;
+    margin: 0;
+
+    @media (min-width: $breakpoint-md) {
+      font-size: 14px;
+    }
+  }
+
+  .payment-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+
+    img {
+      height: 20px;
+      width: auto;
+      object-fit: contain;
+
+      @media (min-width: $breakpoint-md) {
+        height: 24px;
+      }
+    }
+  }
+}
+
+// MOBIL UCHUN QO'SHIMCHA MAXSUS SOZLAMALAR
+@media (max-width: 768px) {
+  .footer {
+
+    // Agar JSX da <footer className="footer"> bo'lsa
+    .hero-footer .container {
+      // Selektorni aniqlashtirdim
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+
+    .top-footer {
+      width: calc(100% - 30px); // Chap va o'ng paddingni hisobga olish (15px + 15px)
+      margin-left: 15px;
+      margin-right: 15px;
+      margin-top: 30px;
+      padding: 20px;
+      margin-bottom: -70px; // Sozlash kerak
+
+      h3 {
+        font-size: 22px;
+      }
+
+      .top-footer-items {
+        max-width: 100%;
+      }
+    }
+
+    .hero-footer {
+      padding-top: 90px; // Sozlash kerak
+    }
+
+    .paragrif-wrapper {
+      .footer-left {
+        order: -1;
+        margin-bottom: 20px;
+        align-items: center;
+        text-align: center;
+
+        span {
+          font-size: 26px;
+          margin-bottom: 8px;
+        }
+
+        p {
+          font-size: 13px;
+          line-height: 1.6;
+          margin-bottom: 12px;
+        }
+
+        .footer-icons {
+          justify-content: center;
+          gap: 18px;
+          margin-top: 5px;
+
+          a svg {
+            width: 22px;
+            height: 22px;
+            fill: $color-text-primary;
+          }
+        }
+      }
+
+      // .footer-left YOPILDI
+
+      .footer-right {
+        grid-template-columns: 1fr; // Yoki repeat(2, 1fr) agar 2 ustun kerak bo'lsa
+        gap: 25px 0;
+
+        .footer-paragrif {
+          align-items: center;
+          text-align: center;
+
+          .column-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+          }
+
+          a,
+          p:not(.column-title) {
+            // Bu yerda p:not(.column-title) kerak emas, agar JSX da faqat a bo'lsa
+            font-size: 14px; // Mobil uchun linklar
+            margin-bottom: 6px;
+            display: block;
+          }
+        }
+      }
+
+      // .footer-right YOPILDI
+    }
+
+    // .paragrif-wrapper YOPILDI
+
+    hr.footer__divider,
+    hr {
+      // Agar JSX da hr ishlatilsa
+      margin: 25px auto;
+      width: 90%;
+    }
+
+    .footer-finish {
+      flex-direction: column-reverse;
+      gap: 18px;
+
+      .payment-cards {
+        margin-bottom: 10px;
+
+        img {
+          height: 18px;
+        }
+      }
+
+      p.copyright-text {
+        font-size: 12px;
+      }
+    }
+
+    // .footer-finish YOPILDI
+  }
+
+  // .footer YOPILDI (media query ichidagi)
+}
+
+// @media YOPILDI
